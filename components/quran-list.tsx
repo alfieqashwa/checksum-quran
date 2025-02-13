@@ -18,15 +18,21 @@ type QuranListProps = {
 
 export function QuranList({ chapters }: QuranListProps) {
   return (
-    <Table>
+    <Table className="text-lg">
       <TableCaption>A list of chapters in Al-Qur&apos;an.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="">Chapter</TableHead>
           <TableHead>Surah</TableHead>
-          <TableHead className="text-center">Verses Count</TableHead>
-          <TableHead className="text-center">Chapter - Verses Sum</TableHead>
-          <TableHead className="text-center">Even or Odd</TableHead>
+          <TableHead className="text-center whitespace-nowrap">
+            Number of Verses
+          </TableHead>
+          <TableHead className="text-center whitespace-nowrap">
+            Chapter + Number of Verses
+          </TableHead>
+          <TableHead className="text-center whitespace-nowrap">
+            Even or Odd
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -35,15 +41,19 @@ export function QuranList({ chapters }: QuranListProps) {
             <TableCell>{chapter.id}</TableCell>
             <TableCell className="space-x-4">
               <span>{chapter.nameSimple}</span>
-              <span>{chapter.nameArabic}</span>
+              <span className="text-sky-500">{chapter.nameArabic}</span>
             </TableCell>
 
             <TableCell className="text-center">{chapter.versesCount}</TableCell>
             <TableCell className="text-center">
               {chapter.id + chapter.versesCount}
             </TableCell>
-            <TableCell className="text-center">
-              {(chapter.id + chapter.versesCount) % 2 === 0 ? "Even" : "Odd"}
+            <TableCell className="text-center font-bold">
+              {(chapter.id + chapter.versesCount) % 2 === 0 ? (
+                <span className="text-emerald-500">Even</span>
+              ) : (
+                <span className="text-amber-500">Odd</span>
+              )}
             </TableCell>
           </TableRow>
         ))}

@@ -40,20 +40,32 @@ export function QuranSummary({ chapters }: { chapters: Chapter[] }) {
     0
   );
   return (
-    <Table className="my-12">
+    <Table className="my-12 text-xl">
       <TableHeader>
         <TableRow>
-          <TableHead className="text-center">Sum of Surah Number</TableHead>
-          <TableHead className="text-center">Sum of Verses Number</TableHead>
-          <TableHead className="text-center">Sum of Odd Result</TableHead>
-          <TableHead className="text-center">Sum of Even Result</TableHead>
+          <TableHead className="text-center whitespace-nowrap">
+            Sum of Surah Number
+          </TableHead>
+          <TableHead className="text-center whitespace-nowrap">
+            Sum of Number of Verses
+          </TableHead>
+          <TableHead className="text-center whitespace-nowrap">
+            Sum of Odd Result
+          </TableHead>
+          <TableHead className="text-center whitespace-nowrap">
+            Sum of Even Result
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         <TableCell className="text-center">{sumOfSurahNumber}</TableCell>
         <TableCell className="text-center">{sumOfVersesNumber}</TableCell>
-        <TableCell className="text-center">{sumOfOddResult}</TableCell>
-        <TableCell className="text-center">{sumOfEvenResult}</TableCell>
+        <TableCell className="text-center text-amber-500">
+          {sumOfOddResult}
+        </TableCell>
+        <TableCell className="text-center text-emerald-500">
+          {sumOfEvenResult}
+        </TableCell>
       </TableBody>
     </Table>
   );
