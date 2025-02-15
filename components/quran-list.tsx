@@ -22,8 +22,8 @@ export function QuranList({ chapters }: QuranListProps) {
       <TableCaption>A list of chapters in Al-Qur&apos;an.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="">Chapter</TableHead>
-          <TableHead>Surah</TableHead>
+          <TableHead className="text-center">Chapter</TableHead>
+          <TableHead className="text-center">Surah</TableHead>
           <TableHead className="text-center whitespace-nowrap">
             Number of Verses
           </TableHead>
@@ -38,8 +38,8 @@ export function QuranList({ chapters }: QuranListProps) {
       <TableBody>
         {chapters.map((chapter) => (
           <TableRow key={chapter.id}>
-            <TableCell>{chapter.id}</TableCell>
-            <TableCell className="space-x-4">
+            <TableCell className="text-center">{chapter.id}</TableCell>
+            <TableCell className="space-x-4 flex justify-center">
               <span>{chapter.nameSimple}</span>
               <span className="text-sky-500">{chapter.nameArabic}</span>
             </TableCell>

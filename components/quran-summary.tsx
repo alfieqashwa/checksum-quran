@@ -57,14 +57,16 @@ export function QuranSummary({ chapters }: { chapters: Chapter[] }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableCell className="text-center">{sumOfSurahNumber}</TableCell>
-        <TableCell className="text-center">{sumOfVersesNumber}</TableCell>
-        <TableCell className="text-center text-amber-500">
-          {sumOfOddResult}
-        </TableCell>
-        <TableCell className="text-center text-emerald-500">
-          {sumOfEvenResult}
-        </TableCell>
+        <TableRow>
+          <TableCell className="text-center">{sumOfSurahNumber}</TableCell>
+          <TableCell className="text-center">{sumOfVersesNumber}</TableCell>
+          <TableCell className="text-center text-amber-500">
+            {sumOfOddResult}
+          </TableCell>
+          <TableCell className="text-center text-emerald-500">
+            {sumOfEvenResult}
+          </TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );
