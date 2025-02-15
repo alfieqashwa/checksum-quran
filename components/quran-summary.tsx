@@ -1,24 +1,18 @@
-"use client";
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 
 import { type Chapter } from "@quranjs/api";
 import React from "react";
 
-export function QuranSummary({ chapters }: { chapters: Chapter[] }) {
+type QuranSummaryProps = {
+  chapters: Chapter[];
+  sumOfVersesNumber: number;
+};
+export function QuranSummary({
+  chapters,
+  sumOfVersesNumber,
+}: QuranSummaryProps) {
   const sumOfSurahNumber = chapters.reduce(
     (acc, chapter) => acc + chapter.id,
-    0
-  );
-  const sumOfVersesNumber = chapters.reduce(
-    (acc, chapter) => acc + chapter.versesCount,
     0
   );
 
@@ -39,35 +33,40 @@ export function QuranSummary({ chapters }: { chapters: Chapter[] }) {
     0
   );
   return (
-    <Table className="my-12 text-xl">
-      <TableHeader>
-        <TableRow>
-          <TableHead className="text-center whitespace-nowrap">
-            Sum of Surah Number
-          </TableHead>
-          <TableHead className="text-center whitespace-nowrap">
-            Sum of Number of Verses
-          </TableHead>
-          <TableHead className="text-center whitespace-nowrap">
-            Sum of Odd Result
-          </TableHead>
-          <TableHead className="text-center whitespace-nowrap">
-            Sum of Even Result
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell className="text-center">{sumOfSurahNumber}</TableCell>
-          <TableCell className="text-center">{sumOfVersesNumber}</TableCell>
-          <TableCell className="text-center text-amber-500">
-            {sumOfOddResult}
-          </TableCell>
-          <TableCell className="text-center text-emerald-500">
-            {sumOfEvenResult}
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <div className="my-12 grid grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-8">
+      <Section>
+        <p>Sum of Surah Number</p>
+        <p className="text-foreground">{sumOfSurahNumber}</p>
+      </Section>
+      <Section>
+        <p>Sum of Number of Verses</p>
+        <p className="text-foreground">{sumOfVersesNumber}</p>
+      </Section>
+      <Section>
+        <p>Sum of Odd Result</p>
+        <p className="text-amber-500">{sumOfOddResult}</p>
+      </Section>
+      <Section>
+        <p>Sum of Even Result</p>
+        <p className="text-emerald-500">{sumOfEvenResult}</p>
+      </Section>
+    </div>
   );
 }
+
+const Section = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) => (
+  <section
+    className={cn(
+      "space-y-2 text-center text-sm shadow-md xl:text-lg xl:whitespace-nowrap font-semibold xl:font-bold text-muted-foreground rounded-md border-2 p-4 xl:p-8",
+      className
+    )}
+  >
+    {children}
+  </section>
+);
