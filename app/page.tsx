@@ -1,5 +1,4 @@
-import { QuranList } from "@/components/quran-list";
-import { QuranSummary } from "@/components/quran-summary";
+import { Wrapper } from "@/components/wrapper";
 import { quran } from "@quranjs/api";
 
 export default async function Home() {
@@ -27,8 +26,7 @@ export default async function Home() {
         </article>
         <p className="text-muted-foreground">(Al-Fajr:3)</p>
       </section>
-      <QuranSummary chapters={chapters} />
-      <QuranList chapters={chapters} />
+      <Wrapper chapters={chapters} />
     </div>
   );
 }
