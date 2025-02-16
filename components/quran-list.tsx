@@ -6,8 +6,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 import { type Chapter } from "@quranjs/api";
 import React, { useEffect, useRef, useState } from "react";
+import { Button } from "./ui/button";
 
 type QuranListProps = {
   chapters: Chapter[];
@@ -20,12 +22,22 @@ export function QuranList({
   setSumOfVersesNumber,
   onVersesCountChange,
 }: QuranListProps) {
+  const [toggleReverseSurah, setToggleReverseSurah] = useState(false);
   return (
     <Table className="text-lg">
       <TableHeader>
         <TableRow>
           <TableHead className="text-center">Chapter</TableHead>
-          <TableHead className="text-center">Surah</TableHead>
+          <TableHead className="text-center space-x-2">
+            <span>Surah</span>
+            <Button
+              size={"sm"}
+              variant={"secondary"}
+              onClick={() => setToggleReverseSurah((prev) => (prev = !prev))}
+            >
+              {!toggleReverseSurah ? "toggle" : "untoggle"}
+            </Button>
+          </TableHead>
           <TableHead className="text-center whitespace-nowrap">
             Number of Verses
           </TableHead>
@@ -44,6 +56,7 @@ export function QuranList({
             key={chapter.id}
             setSumOfVersesNumber={setSumOfVersesNumber}
             onVersesCountChange={onVersesCountChange}
+            toggleReverseSurah={toggleReverseSurah}
           />
         ))}
       </TableBody>
@@ -55,10 +68,12 @@ const ListTableRow = ({
   chapter,
   setSumOfVersesNumber,
   onVersesCountChange,
+  toggleReverseSurah,
 }: {
   chapter: Chapter;
   setSumOfVersesNumber: React.Dispatch<React.SetStateAction<number>>;
   onVersesCountChange: (chapterId: number, newVersesCount: number) => void;
+  toggleReverseSurah: boolean;
 }) => {
   const [versesCount, setVersesCount] = useState<number | string>(
     chapter.versesCount
@@ -85,7 +100,25 @@ const ListTableRow = ({
     <TableRow>
       <TableCell className="text-center">{chapter.id}</TableCell>
       <TableCell className="space-x-4 flex justify-center">
-        <span>{chapter.nameSimple}</span>
+        {toggleReverseSurah ? (
+          <span
+            className={cn(
+              "px-2 rounded-md",
+              chapter.versesCount % 2 === 0 &&
+                (chapter.id + chapter.versesCount) % 2 === 1
+                ? "bg-gradient-to-r from-emerald-800 to-amber-800"
+                : "",
+              chapter.versesCount % 2 === 1 &&
+                (chapter.id + chapter.versesCount) % 2 === 0
+                ? "bg-gradient-to-l from-emerald-800 to-amber-800"
+                : ""
+            )}
+          >
+            {chapter.nameSimple}
+          </span>
+        ) : (
+          <span>{chapter.nameSimple}</span>
+        )}
         <span className="text-sky-500">{chapter.nameArabic}</span>
       </TableCell>
 

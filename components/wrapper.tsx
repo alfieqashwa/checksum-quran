@@ -18,6 +18,30 @@ export function Wrapper(props: Props) {
     0
   );
 
+  const sumOfSurahNumber = props.chapters.reduce(
+    (acc, chapter) => acc + chapter.id,
+    0
+  );
+
+  // const sumOfOddSurahNumber = props.chapters.filter(
+  //   (f) => f.id % 2 === 0
+  // ).length;
+  // const sumOfEvenSurahNumber = props.chapters.filter(
+  //   (f) => f.id % 2 === 0
+  // ).length;
+
+  const sumOfOddVersesNumber = props.chapters.filter(
+    (f) => (f.versesCount + f.id) % 2 === 1
+  ).length;
+
+  const sumOfEvenVersesNumber = props.chapters.filter(
+    (f) => (f.versesCount + f.id) % 2 === 0
+  ).length;
+
+  console.log({ sumOfOddVersesNumber, sumOfEvenVersesNumber });
+
+  const CHECKSUM_QURAN = sumOfSurahNumber - initialSumOfVersesNumber;
+
   const initialChaptersRef = useRef(props.chapters);
 
   const [sumOfVersesNumber, setSumOfVersesNumber] = useState(
@@ -47,7 +71,9 @@ export function Wrapper(props: Props) {
   return (
     <div>
       <QuranSummary
+        checksum={CHECKSUM_QURAN}
         chapters={updatedChapters}
+        sumOfSurahNumber={sumOfSurahNumber}
         sumOfVersesNumber={sumOfVersesNumber}
       />
       <VerseKey319 verseKey={props.verseKey} />

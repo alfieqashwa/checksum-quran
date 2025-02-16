@@ -4,18 +4,17 @@ import { type Chapter } from "@quranjs/api";
 import React from "react";
 
 type QuranSummaryProps = {
+  checksum: number;
   chapters: Chapter[];
+  sumOfSurahNumber: number;
   sumOfVersesNumber: number;
 };
 export function QuranSummary({
+  checksum,
   chapters,
+  sumOfSurahNumber,
   sumOfVersesNumber,
 }: QuranSummaryProps) {
-  const sumOfSurahNumber = chapters.reduce(
-    (acc, chapter) => acc + chapter.id,
-    0
-  );
-
   const sumOfOddResult = chapters.reduce(
     (acc, chapter) =>
       acc +
@@ -40,15 +39,41 @@ export function QuranSummary({
       </Section>
       <Section>
         <p>Sum of Number of Verses</p>
-        <p className="text-foreground">{sumOfVersesNumber}</p>
+        <p
+          className={cn(
+            sumOfVersesNumber !== sumOfEvenResult ||
+              sumOfSurahNumber - sumOfVersesNumber !== checksum
+              ? "text-red-500"
+              : "text-foreground"
+          )}
+        >
+          {sumOfVersesNumber}
+        </p>
       </Section>
       <Section>
         <p>Sum of Odd Result</p>
-        <p className="text-amber-500">{sumOfOddResult}</p>
+        <p
+          className={cn(
+            sumOfSurahNumber !== sumOfOddResult
+              ? "text-red-500"
+              : "text-amber-500"
+          )}
+        >
+          {sumOfOddResult}
+        </p>
       </Section>
       <Section>
         <p>Sum of Even Result</p>
-        <p className="text-emerald-500">{sumOfEvenResult}</p>
+        <p
+          className={cn(
+            sumOfVersesNumber !== sumOfEvenResult ||
+              sumOfSurahNumber - sumOfVersesNumber !== checksum
+              ? "text-rose-500"
+              : "text-emerald-500"
+          )}
+        >
+          {sumOfEvenResult}
+        </p>
       </Section>
     </div>
   );
