@@ -22,7 +22,7 @@ export function QuranList({
   setSumOfVersesNumber,
   onVersesCountChange,
 }: QuranListProps) {
-  const [toggleReverseSurah, setToggleReverseSurah] = useState(false);
+  const [toggleBackground, setToggleBackground] = useState(false);
   return (
     <Table className="text-lg">
       <TableHeader>
@@ -33,9 +33,9 @@ export function QuranList({
             <Button
               size={"sm"}
               variant={"secondary"}
-              onClick={() => setToggleReverseSurah((prev) => (prev = !prev))}
+              onClick={() => setToggleBackground((prev) => (prev = !prev))}
             >
-              {!toggleReverseSurah ? "toggle" : "untoggle"}
+              {!toggleBackground ? "toggle" : "untoggle"}
             </Button>
           </TableHead>
           <TableHead className="text-center whitespace-nowrap">
@@ -56,7 +56,7 @@ export function QuranList({
             key={chapter.id}
             setSumOfVersesNumber={setSumOfVersesNumber}
             onVersesCountChange={onVersesCountChange}
-            toggleReverseSurah={toggleReverseSurah}
+            toggleBackground={toggleBackground}
           />
         ))}
       </TableBody>
@@ -68,15 +68,15 @@ const ListTableRow = ({
   chapter,
   setSumOfVersesNumber,
   onVersesCountChange,
-  toggleReverseSurah,
+  toggleBackground,
 }: {
   chapter: Chapter;
   setSumOfVersesNumber: React.Dispatch<React.SetStateAction<number>>;
   onVersesCountChange: (chapterId: number, newVersesCount: number) => void;
-  toggleReverseSurah: boolean;
+  toggleBackground: boolean;
 }) => {
   const [versesCount, setVersesCount] = useState<number | string>(
-    chapter.versesCount
+    chapter.versesCount,
   );
 
   const prevVersesCountRef = useRef<number | string>(chapter.versesCount);
@@ -89,7 +89,7 @@ const ListTableRow = ({
     const prevVersesCount = prevVersesCountRef.current;
     if (prevVersesCount !== versesCount) {
       setSumOfVersesNumber(
-        (prevSum) => prevSum - Number(prevVersesCount) + Number(versesCount)
+        (prevSum) => prevSum - Number(prevVersesCount) + Number(versesCount),
       );
       prevVersesCountRef.current = versesCount;
       onVersesCountChange(chapter.id, Number(versesCount));
@@ -100,7 +100,7 @@ const ListTableRow = ({
     <TableRow>
       <TableCell className="text-center">{chapter.id}</TableCell>
       <TableCell className="space-x-4 flex justify-center">
-        {toggleReverseSurah ? (
+        {toggleBackground ? (
           <span
             className={cn(
               "px-2 rounded-md",
@@ -111,7 +111,7 @@ const ListTableRow = ({
               chapter.versesCount % 2 === 1 &&
                 (chapter.id + chapter.versesCount) % 2 === 0
                 ? "bg-gradient-to-l from-emerald-800 to-amber-800"
-                : ""
+                : "",
             )}
           >
             {chapter.nameSimple}
