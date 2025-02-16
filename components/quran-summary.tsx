@@ -88,7 +88,7 @@ const Section = ({
 }) => (
   <section
     className={cn(
-      "space-y-2 rounded-md border-2 p-4 text-center text-sm font-semibold text-muted-foreground shadow-md xl:whitespace-nowrap xl:p-8 xl:text-lg xl:font-bold",
+      "space-y-2 rounded-xl border-4 p-4 text-center text-sm font-semibold text-muted-foreground shadow-lg xl:whitespace-nowrap xl:p-8 xl:text-lg xl:font-bold",
       className,
     )}
   >
