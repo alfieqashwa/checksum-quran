@@ -9,7 +9,7 @@ import {
 import { cn } from "@/lib/utils"
 import { type Chapter } from "@quranjs/api"
 import React, { useEffect, useRef, useState } from "react"
-import { Button } from "./ui/button"
+import { Switch } from "./ui/switch"
 
 type QuranListProps = {
   chapters: Chapter[]
@@ -28,15 +28,11 @@ export function QuranList({
       <TableHeader>
         <TableRow>
           <TableHead className="text-center">Chapter</TableHead>
-          <TableHead className="space-x-2 text-center">
+          <TableHead className="space-x-4 text-center">
             <span>Surah</span>
-            <Button
-              size={"sm"}
-              variant={"secondary"}
+            <Switch
               onClick={() => setToggleBackground((prev) => (prev = !prev))}
-            >
-              {!toggleBackground ? "toggle" : "untoggle"}
-            </Button>
+            />
           </TableHead>
           <TableHead className="whitespace-nowrap text-center">
             Number of Verses
@@ -96,6 +92,14 @@ const ListTableRow = ({
     }
   }, [versesCount, setSumOfVersesNumber, chapter.id, onVersesCountChange])
 
+  const event2Odd =
+    chapter.versesCount % 2 === 0 &&
+    (chapter.id + chapter.versesCount) % 2 === 1
+
+  const odd2Even =
+    chapter.versesCount % 2 === 1 &&
+    (chapter.id + chapter.versesCount) % 2 === 0
+
   return (
     <TableRow>
       <TableCell className="text-center">{chapter.id}</TableCell>
@@ -103,15 +107,9 @@ const ListTableRow = ({
         {toggleBackground ? (
           <span
             className={cn(
-              "rounded-md px-2",
-              chapter.versesCount % 2 === 0 &&
-                (chapter.id + chapter.versesCount) % 2 === 1
-                ? "bg-gradient-to-r from-emerald-800 to-amber-800"
-                : "",
-              chapter.versesCount % 2 === 1 &&
-                (chapter.id + chapter.versesCount) % 2 === 0
-                ? "bg-gradient-to-l from-emerald-800 to-amber-800"
-                : "",
+              "rounded-md px-4",
+              event2Odd ? "bg-gradient-to-r from-emerald-800 to-amber-800" : "",
+              odd2Even ? "bg-gradient-to-l from-emerald-800 to-amber-800" : "",
             )}
           >
             {chapter.nameSimple}
@@ -119,7 +117,15 @@ const ListTableRow = ({
         ) : (
           <span>{chapter.nameSimple}</span>
         )}
-        <span className="text-sky-500">{chapter.nameArabic}</span>
+        <span
+          className={cn(
+            "font-bold tracking-wider",
+            toggleBackground && event2Odd ? "text-sky-400" : "",
+            toggleBackground && odd2Even ? "text-sky-400" : "",
+          )}
+        >
+          {chapter.nameArabic}
+        </span>
       </TableCell>
 
       <TableCell className="text-center">
