@@ -1,27 +1,27 @@
-"use client";
+"use client"
 
-import { Chapter, Verse } from "@quranjs/api";
-import { useRef, useState } from "react";
-import { QuranList } from "./quran-list";
-import { QuranSummary } from "./quran-summary";
-import { Button } from "./ui/button";
-import { VerseKey319 } from "./verse-key-319";
+import { Chapter, Verse } from "@quranjs/api"
+import { useRef, useState } from "react"
+import { QuranList } from "./quran-list"
+import { QuranSummary } from "./quran-summary"
+import { Button } from "./ui/button"
+import { VerseKey319 } from "./verse-key-319"
 
 type Props = {
-  chapters: Chapter[];
-  verseKey: Verse;
-};
+  chapters: Chapter[]
+  verseKey: Verse
+}
 
 export function Wrapper(props: Props) {
   const initialSumOfVersesNumber = props.chapters.reduce(
     (acc, chapter) => acc + chapter.versesCount,
-    0
-  );
+    0,
+  )
 
   const sumOfSurahNumber = props.chapters.reduce(
     (acc, chapter) => acc + chapter.id,
-    0
-  );
+    0,
+  )
 
   // const sumOfOddSurahNumber = props.chapters.filter(
   //   (f) => f.id % 2 === 0
@@ -31,42 +31,42 @@ export function Wrapper(props: Props) {
   // ).length;
 
   const sumOfOddVersesNumber = props.chapters.filter(
-    (f) => (f.versesCount + f.id) % 2 === 1
-  ).length;
+    (f) => (f.versesCount + f.id) % 2 === 1,
+  ).length
 
   const sumOfEvenVersesNumber = props.chapters.filter(
-    (f) => (f.versesCount + f.id) % 2 === 0
-  ).length;
+    (f) => (f.versesCount + f.id) % 2 === 0,
+  ).length
 
-  console.log({ sumOfOddVersesNumber, sumOfEvenVersesNumber });
+  console.log({ sumOfOddVersesNumber, sumOfEvenVersesNumber })
 
-  const CHECKSUM_QURAN = sumOfSurahNumber - initialSumOfVersesNumber;
+  const CHECKSUM_QURAN = sumOfSurahNumber - initialSumOfVersesNumber
 
-  const initialChaptersRef = useRef(props.chapters);
+  const initialChaptersRef = useRef(props.chapters)
 
   const [sumOfVersesNumber, setSumOfVersesNumber] = useState(
-    initialSumOfVersesNumber
-  );
+    initialSumOfVersesNumber,
+  )
 
-  const [updatedChapters, setUpdatedChapters] = useState(props.chapters);
+  const [updatedChapters, setUpdatedChapters] = useState(props.chapters)
 
   const handleVersesCountChange = (
     chapterId: number,
-    newVersesCount: number
+    newVersesCount: number,
   ) => {
     setUpdatedChapters((prevChapters) =>
       prevChapters.map((chapter) =>
         chapter.id === chapterId
           ? { ...chapter, versesCount: newVersesCount }
-          : chapter
-      )
-    );
-  };
+          : chapter,
+      ),
+    )
+  }
 
   const handleReset = () => {
-    setUpdatedChapters(initialChaptersRef.current);
-    setSumOfVersesNumber(initialSumOfVersesNumber);
-  };
+    setUpdatedChapters(initialChaptersRef.current)
+    setSumOfVersesNumber(initialSumOfVersesNumber)
+  }
 
   return (
     <div>
@@ -82,7 +82,7 @@ export function Wrapper(props: Props) {
         setSumOfVersesNumber={setSumOfVersesNumber}
         onVersesCountChange={handleVersesCountChange}
       />
-      <div className="fixed z-20 bottom-4 right-4">
+      <div className="fixed bottom-4 right-4 z-20">
         <Button
           size={"lg"}
           variant={"secondary"}
@@ -93,5 +93,5 @@ export function Wrapper(props: Props) {
         </Button>
       </div>
     </div>
-  );
+  )
 }

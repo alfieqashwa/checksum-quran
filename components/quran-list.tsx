@@ -5,30 +5,30 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { cn } from "@/lib/utils";
-import { type Chapter } from "@quranjs/api";
-import React, { useEffect, useRef, useState } from "react";
-import { Button } from "./ui/button";
+} from "@/components/ui/table"
+import { cn } from "@/lib/utils"
+import { type Chapter } from "@quranjs/api"
+import React, { useEffect, useRef, useState } from "react"
+import { Button } from "./ui/button"
 
 type QuranListProps = {
-  chapters: Chapter[];
-  setSumOfVersesNumber: React.Dispatch<React.SetStateAction<number>>;
-  onVersesCountChange: (chapterId: number, newVersesCount: number) => void;
-};
+  chapters: Chapter[]
+  setSumOfVersesNumber: React.Dispatch<React.SetStateAction<number>>
+  onVersesCountChange: (chapterId: number, newVersesCount: number) => void
+}
 
 export function QuranList({
   chapters,
   setSumOfVersesNumber,
   onVersesCountChange,
 }: QuranListProps) {
-  const [toggleBackground, setToggleBackground] = useState(false);
+  const [toggleBackground, setToggleBackground] = useState(false)
   return (
     <Table className="text-lg">
       <TableHeader>
         <TableRow>
           <TableHead className="text-center">Chapter</TableHead>
-          <TableHead className="text-center space-x-2">
+          <TableHead className="space-x-2 text-center">
             <span>Surah</span>
             <Button
               size={"sm"}
@@ -38,13 +38,13 @@ export function QuranList({
               {!toggleBackground ? "toggle" : "untoggle"}
             </Button>
           </TableHead>
-          <TableHead className="text-center whitespace-nowrap">
+          <TableHead className="whitespace-nowrap text-center">
             Number of Verses
           </TableHead>
-          <TableHead className="text-center whitespace-nowrap">
+          <TableHead className="whitespace-nowrap text-center">
             Chapter + Number of Verses
           </TableHead>
-          <TableHead className="text-center whitespace-nowrap">
+          <TableHead className="whitespace-nowrap text-center">
             Even or Odd
           </TableHead>
         </TableRow>
@@ -61,7 +61,7 @@ export function QuranList({
         ))}
       </TableBody>
     </Table>
-  );
+  )
 }
 
 const ListTableRow = ({
@@ -70,40 +70,40 @@ const ListTableRow = ({
   onVersesCountChange,
   toggleBackground,
 }: {
-  chapter: Chapter;
-  setSumOfVersesNumber: React.Dispatch<React.SetStateAction<number>>;
-  onVersesCountChange: (chapterId: number, newVersesCount: number) => void;
-  toggleBackground: boolean;
+  chapter: Chapter
+  setSumOfVersesNumber: React.Dispatch<React.SetStateAction<number>>
+  onVersesCountChange: (chapterId: number, newVersesCount: number) => void
+  toggleBackground: boolean
 }) => {
   const [versesCount, setVersesCount] = useState<number | string>(
     chapter.versesCount,
-  );
+  )
 
-  const prevVersesCountRef = useRef<number | string>(chapter.versesCount);
-
-  useEffect(() => {
-    setVersesCount(chapter.versesCount);
-  }, [chapter.versesCount]);
+  const prevVersesCountRef = useRef<number | string>(chapter.versesCount)
 
   useEffect(() => {
-    const prevVersesCount = prevVersesCountRef.current;
+    setVersesCount(chapter.versesCount)
+  }, [chapter.versesCount])
+
+  useEffect(() => {
+    const prevVersesCount = prevVersesCountRef.current
     if (prevVersesCount !== versesCount) {
       setSumOfVersesNumber(
         (prevSum) => prevSum - Number(prevVersesCount) + Number(versesCount),
-      );
-      prevVersesCountRef.current = versesCount;
-      onVersesCountChange(chapter.id, Number(versesCount));
+      )
+      prevVersesCountRef.current = versesCount
+      onVersesCountChange(chapter.id, Number(versesCount))
     }
-  }, [versesCount, setSumOfVersesNumber, chapter.id, onVersesCountChange]);
+  }, [versesCount, setSumOfVersesNumber, chapter.id, onVersesCountChange])
 
   return (
     <TableRow>
       <TableCell className="text-center">{chapter.id}</TableCell>
-      <TableCell className="space-x-4 flex justify-center">
+      <TableCell className="flex justify-center space-x-4">
         {toggleBackground ? (
           <span
             className={cn(
-              "px-2 rounded-md",
+              "rounded-md px-2",
               chapter.versesCount % 2 === 0 &&
                 (chapter.id + chapter.versesCount) % 2 === 1
                 ? "bg-gradient-to-r from-emerald-800 to-amber-800"
@@ -128,7 +128,7 @@ const ListTableRow = ({
           min={1}
           value={versesCount}
           onChange={(e) => setVersesCount(e.target.value)}
-          className=" text-center bg-transparent"
+          className="bg-transparent text-center"
         />
       </TableCell>
       <TableCell className="text-center">
@@ -142,5 +142,5 @@ const ListTableRow = ({
         )}
       </TableCell>
     </TableRow>
-  );
-};
+  )
+}

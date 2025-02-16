@@ -1,27 +1,27 @@
-import { Wrapper } from "@/components/wrapper";
-import { quran } from "@quranjs/api";
+import { Wrapper } from "@/components/wrapper"
+import { quran } from "@quranjs/api"
 
 export default async function Home() {
-  const chapters = await quran.v4.chapters.findAll();
+  const chapters = await quran.v4.chapters.findAll()
   const alfajr3 = await quran.v4.verses.findByKey("89:3", {
     fields: {
       textImlaei: true,
     },
     words: true,
-  });
+  })
 
   const verseKey319 = await quran.v4.verses.findByKey("3:19", {
     fields: {
       textImlaei: true,
     },
     words: true,
-  });
+  })
 
   return (
-    <div className="p-4 my-4 xl:p-12">
+    <div className="my-4 p-4 xl:p-12">
       <section className="text-center font-bold">
         <h2 className="text-3xl tracking-wide">{alfajr3.textImlaei}</h2>
-        <article className="flex tracking-wider text-xl mt-2 text-muted-foreground justify-center space-x-1">
+        <article className="mt-2 flex justify-center space-x-1 text-xl tracking-wider text-muted-foreground">
           {alfajr3.words
             ?.filter((_, i) => i !== 2)
             .map((word, i) => (
@@ -35,5 +35,5 @@ export default async function Home() {
 
       <Wrapper chapters={chapters} verseKey={verseKey319} />
     </div>
-  );
+  )
 }
