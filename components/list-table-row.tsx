@@ -36,7 +36,7 @@ export const ListTableRow = ({
     }
   }, [versesCount, setSumOfVersesNumber, chapter.id, onVersesCountChange])
 
-  const event2Odd =
+  const even2Odd =
     chapter.versesCount % 2 === 0 &&
     (chapter.id + chapter.versesCount) % 2 === 1
 
@@ -44,7 +44,7 @@ export const ListTableRow = ({
     chapter.versesCount % 2 === 1 &&
     (chapter.id + chapter.versesCount) % 2 === 0
 
-  const content = event2Odd ? (
+  const content = even2Odd ? (
     <p className="flex items-center space-x-0.5 text-sm">
       <span className="text-emerald-500">even</span>
       <ChevronRight size={14} />
@@ -77,7 +77,7 @@ export const ListTableRow = ({
           <span
             className={cn(
               "text-lg font-bold tracking-wider",
-              toggleBackground && event2Odd ? "text-sky-400" : "",
+              toggleBackground && even2Odd ? "text-sky-400" : "",
               toggleBackground && odd2Even ? "text-sky-400" : "",
             )}
           >
@@ -92,7 +92,7 @@ export const ListTableRow = ({
               <span
                 className={cn(
                   "rounded-md px-3 py-1.5",
-                  event2Odd
+                  even2Odd
                     ? "bg-gradient-to-r from-emerald-800 to-amber-800"
                     : "",
                   odd2Even
