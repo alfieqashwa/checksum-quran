@@ -72,39 +72,41 @@ export const ListTableRow = ({
       <TableCell className="text-center">
         <span className="rounded-md bg-muted px-3 py-1.5">{chapter.id}</span>
       </TableCell>
-      <TableCell className="flex w-[180px] flex-col items-center space-y-1 whitespace-nowrap">
-        <span
-          className={cn(
-            "text-lg font-bold tracking-wider",
-            toggleBackground && event2Odd ? "text-sky-400" : "",
-            toggleBackground && odd2Even ? "text-sky-400" : "",
-          )}
-        >
-          {chapter.nameArabic}
-        </span>
-        {toggleBackground ? (
-          <CustomTooltip
-            side="left"
-            content={content}
-            className="flex justify-center"
+      <TableCell className="text-center">
+        <p className="mx-auto flex w-[120px] flex-col items-center justify-center space-y-1 whitespace-nowrap">
+          <span
+            className={cn(
+              "text-lg font-bold tracking-wider",
+              toggleBackground && event2Odd ? "text-sky-400" : "",
+              toggleBackground && odd2Even ? "text-sky-400" : "",
+            )}
           >
-            <span
-              className={cn(
-                "rounded-md px-3 py-1.5",
-                event2Odd
-                  ? "bg-gradient-to-r from-emerald-800 to-amber-800"
-                  : "",
-                odd2Even
-                  ? "bg-gradient-to-l from-emerald-800 to-amber-800"
-                  : "",
-              )}
+            {chapter.nameArabic}
+          </span>
+          {toggleBackground ? (
+            <CustomTooltip
+              side="right"
+              content={content}
+              className="flex justify-center"
             >
-              {chapter.nameSimple}
-            </span>
-          </CustomTooltip>
-        ) : (
-          <span>{chapter.nameSimple}</span>
-        )}
+              <span
+                className={cn(
+                  "rounded-md px-3 py-1.5",
+                  event2Odd
+                    ? "bg-gradient-to-r from-emerald-800 to-amber-800"
+                    : "",
+                  odd2Even
+                    ? "bg-gradient-to-l from-emerald-800 to-amber-800"
+                    : "",
+                )}
+              >
+                {chapter.nameSimple}
+              </span>
+            </CustomTooltip>
+          ) : (
+            <span>{chapter.nameSimple}</span>
+          )}
+        </p>
       </TableCell>
 
       <TableCell className="text-center">
@@ -131,16 +133,21 @@ export const ListTableRow = ({
         </div>
       </TableCell>
       <TableCell className="text-center">
-        <span className="rounded-md bg-muted px-3 py-1">
+        <p className="mx-auto w-14 rounded-md bg-muted px-3 py-1.5">
           {chapter.id + versesCount}
-        </span>
+        </p>
       </TableCell>
-      <TableCell className="text-center font-medium">
-        {(chapter.id + versesCount) % 2 === 0 ? (
-          <span className="text-emerald-500">Even</span>
-        ) : (
-          <span className="text-amber-500">Odd</span>
-        )}
+      <TableCell className="text-center">
+        <p
+          className={cn(
+            "mx-auto flex h-9 w-20 items-center justify-center rounded-sm font-medium",
+            (chapter.id + versesCount) % 2 === 0
+              ? "bg-emerald-600"
+              : "bg-amber-500",
+          )}
+        >
+          {(chapter.id + versesCount) % 2 === 0 ? "Even" : "Odd"}
+        </p>
       </TableCell>
     </TableRow>
   )

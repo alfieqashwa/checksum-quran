@@ -27,20 +27,21 @@ export function QuranList({
       <TableHeader>
         <TableRow>
           <TableHead className="text-center">Chapter</TableHead>
-          <TableHead className="space-x-4 text-center">
+          <TableHead className="relative text-center">
             <span>Surah</span>
             <Switch
+              className="absolute top-2 ml-4"
               onClick={() => setToggleBackground((prev) => (prev = !prev))}
             />
           </TableHead>
           <TableHead className="whitespace-nowrap text-center">
-            Number of Verses
+            Total Verses
           </TableHead>
           <TableHead className="whitespace-nowrap text-center">
-            Chapter + Number of Verses
+            Chapter + Total Verses
           </TableHead>
           <TableHead className="whitespace-nowrap text-center">
-            Even or Odd
+            Even / Odd
           </TableHead>
         </TableRow>
       </TableHeader>

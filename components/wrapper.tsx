@@ -23,6 +23,7 @@ export function Wrapper(props: Props) {
     0,
   )
 
+  // ====== DEBUGGING ======
   // const sumOfOddSurahNumber = props.chapters.filter(
   //   (f) => f.id % 2 === 0
   // ).length;
@@ -30,15 +31,15 @@ export function Wrapper(props: Props) {
   //   (f) => f.id % 2 === 0
   // ).length;
 
-  const sumOfOddVersesNumber = props.chapters.filter(
-    (f) => (f.versesCount + f.id) % 2 === 1,
-  ).length
+  // const sumOfOddVersesNumber = props.chapters.filter(
+  //   (f) => (f.versesCount + f.id) % 2 === 1,
+  // ).length
 
-  const sumOfEvenVersesNumber = props.chapters.filter(
-    (f) => (f.versesCount + f.id) % 2 === 0,
-  ).length
+  // const sumOfEvenVersesNumber = props.chapters.filter(
+  //   (f) => (f.versesCount + f.id) % 2 === 0,
+  // ).length
 
-  console.log({ sumOfOddVersesNumber, sumOfEvenVersesNumber })
+  // console.log({ sumOfOddVersesNumber, sumOfEvenVersesNumber })
 
   const CHECKSUM_QURAN = sumOfSurahNumber - initialSumOfVersesNumber
 

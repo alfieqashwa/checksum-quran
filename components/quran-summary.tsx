@@ -35,12 +35,15 @@ export function QuranSummary({
     <div className="my-12 grid grid-cols-2 gap-4 xl:grid-cols-4 xl:gap-8">
       <Section>
         <p>Sum of Surah Number</p>
-        <p className="text-foreground">{sumOfSurahNumber}</p>
+        <p className="text-lg text-foreground xl:text-2xl">
+          {sumOfSurahNumber}
+        </p>
       </Section>
       <Section>
-        <p>Sum of Number of Verses</p>
+        <p>Sum of Total Verses</p>
         <p
           className={cn(
+            "text-lg xl:text-2xl",
             sumOfVersesNumber !== sumOfEvenResult ||
               sumOfSurahNumber - sumOfVersesNumber !== checksum
               ? "text-red-500"
@@ -54,6 +57,7 @@ export function QuranSummary({
         <p>Sum of Odd Result</p>
         <p
           className={cn(
+            "text-lg xl:text-2xl",
             sumOfSurahNumber !== sumOfOddResult
               ? "text-red-500"
               : "text-amber-500",
@@ -66,6 +70,7 @@ export function QuranSummary({
         <p>Sum of Even Result</p>
         <p
           className={cn(
+            "text-lg xl:text-2xl",
             sumOfVersesNumber !== sumOfEvenResult ||
               sumOfSurahNumber - sumOfVersesNumber !== checksum
               ? "text-rose-500"
@@ -88,7 +93,7 @@ const Section = ({
 }) => (
   <section
     className={cn(
-      "space-y-2 rounded-xl border-4 p-4 text-center text-sm font-semibold text-muted-foreground shadow-lg xl:whitespace-nowrap xl:p-8 xl:text-lg xl:font-bold",
+      "space-y-2 rounded-xl border-2 p-4 text-center text-sm font-semibold text-muted-foreground shadow-lg xl:whitespace-nowrap xl:border-4 xl:p-8 xl:text-lg xl:font-bold",
       className,
     )}
   >

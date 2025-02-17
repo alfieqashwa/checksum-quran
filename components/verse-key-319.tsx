@@ -3,7 +3,9 @@ import { Verse } from "@quranjs/api"
 export function VerseKey319({ verseKey }: { verseKey: Verse }) {
   return (
     <section className="my-12 text-center font-bold">
-      <h2 className="text-xl tracking-wide">{verseKey.textImlaei}</h2>
+      <h2 className="text-xl tracking-wide text-amber-300">
+        {verseKey.textImlaei}
+      </h2>
       <article className="hidden justify-center space-x-1 text-sm xl:flex">
         {verseKey.words
           ?.filter((word) => word.position < 19)
