@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils"
 import { Chapter } from "@quranjs/api"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, Minus, Plus } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { CustomTooltip } from "./custom-tooltip"
-import { Input } from "./ui/input"
+import { Button } from "./ui/button"
 import { TableCell, TableRow } from "./ui/table"
 
 export const ListTableRow = ({
@@ -17,11 +17,9 @@ export const ListTableRow = ({
   onVersesCountChange: (chapterId: number, newVersesCount: number) => void
   toggleBackground: boolean
 }) => {
-  const [versesCount, setVersesCount] = useState<number | string>(
-    chapter.versesCount,
-  )
+  const [versesCount, setVersesCount] = useState<number>(chapter.versesCount)
 
-  const prevVersesCountRef = useRef<number | string>(chapter.versesCount)
+  const prevVersesCountRef = useRef<number>(chapter.versesCount)
 
   useEffect(() => {
     setVersesCount(chapter.versesCount)
@@ -61,6 +59,14 @@ export const ListTableRow = ({
   ) : (
     ""
   )
+
+  const handleIncrement = () => {
+    setVersesCount((prev) => prev + 1)
+  }
+  const handleDecrement = () => {
+    setVersesCount((prev) => Math.max(1, prev - 1))
+  }
+
   return (
     <TableRow>
       <TableCell className="text-center">
@@ -101,22 +107,36 @@ export const ListTableRow = ({
         )}
       </TableCell>
 
-      <TableCell className="w-[100px] text-center">
-        <Input
-          type="number"
-          min={1}
-          value={versesCount}
-          onChange={(e) => setVersesCount(e.target.value)}
-          className="rounded-md bg-transparent text-center text-lg font-semibold"
-        />
+      <TableCell className="text-center">
+        <div className="flex items-center justify-center space-x-6">
+          <Button
+            type="button"
+            variant={"outline"}
+            onClick={handleDecrement}
+            className="rounded-lg px-3 py-1 font-bold"
+          >
+            <Minus />
+          </Button>
+          <p className="w-14 rounded-md bg-muted px-3 py-1.5 text-center">
+            {versesCount}
+          </p>
+          <Button
+            type="button"
+            variant={"outline"}
+            onClick={handleIncrement}
+            className="rounded-lg px-3 py-1 font-bold"
+          >
+            <Plus />
+          </Button>
+        </div>
       </TableCell>
       <TableCell className="text-center">
-        <span className="rounded-md bg-muted px-3 py-1.5">
-          {chapter.id + Number(versesCount)}
+        <span className="rounded-md bg-muted px-3 py-1">
+          {chapter.id + versesCount}
         </span>
       </TableCell>
       <TableCell className="text-center font-medium">
-        {(chapter.id + Number(versesCount)) % 2 === 0 ? (
+        {(chapter.id + versesCount) % 2 === 0 ? (
           <span className="text-emerald-500">Even</span>
         ) : (
           <span className="text-amber-500">Odd</span>
