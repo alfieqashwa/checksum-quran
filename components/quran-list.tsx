@@ -8,7 +8,9 @@ import {
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
 import { type Chapter } from "@quranjs/api"
+import { ChevronRight } from "lucide-react"
 import React, { useEffect, useRef, useState } from "react"
+import { CustomTooltip } from "./custom-tooltip"
 import { Switch } from "./ui/switch"
 
 type QuranListProps = {
@@ -100,20 +102,45 @@ const ListTableRow = ({
     chapter.versesCount % 2 === 1 &&
     (chapter.id + chapter.versesCount) % 2 === 0
 
+  const content = event2Odd ? (
+    <p className="flex items-center space-x-0.5 text-sm">
+      <span className="text-emerald-500">even</span>
+      <ChevronRight size={14} />
+      <span className="text-amber-500">odd</span>
+    </p>
+  ) : odd2Even ? (
+    <p className="flex items-center space-x-0.5 text-sm">
+      <span className="text-amber-500">odd</span>
+      <ChevronRight size={14} />
+      <span className="text-emerald-500">even</span>
+    </p>
+  ) : (
+    ""
+  )
   return (
     <TableRow>
       <TableCell className="text-center">{chapter.id}</TableCell>
-      <TableCell className="flex justify-center space-x-4">
+      <TableCell className="space-x-4">
         {toggleBackground ? (
-          <span
-            className={cn(
-              "rounded-md px-4",
-              event2Odd ? "bg-gradient-to-r from-emerald-800 to-amber-800" : "",
-              odd2Even ? "bg-gradient-to-l from-emerald-800 to-amber-800" : "",
-            )}
+          <CustomTooltip
+            side="left"
+            content={content}
+            className="flex justify-center"
           >
-            {chapter.nameSimple}
-          </span>
+            <span
+              className={cn(
+                "rounded-md px-3 py-1.5",
+                event2Odd
+                  ? "bg-gradient-to-r from-emerald-800 to-amber-800"
+                  : "",
+                odd2Even
+                  ? "bg-gradient-to-l from-emerald-800 to-amber-800"
+                  : "",
+              )}
+            >
+              {chapter.nameSimple}
+            </span>
+          </CustomTooltip>
         ) : (
           <span>{chapter.nameSimple}</span>
         )}
