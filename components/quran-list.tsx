@@ -41,7 +41,7 @@ export function QuranList({
             Chapter + Total Verses
           </TableHead>
           <TableHead className="whitespace-nowrap text-center">
-            Even / Odd
+            Parity
           </TableHead>
         </TableRow>
       </TableHeader>
