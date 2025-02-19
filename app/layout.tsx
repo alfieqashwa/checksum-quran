@@ -1,3 +1,4 @@
+import { LinkPage } from "@/components/link"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TooltipProvider>
+          <LinkPage />
           <main className="my-4 p-4 xl:p-12">{children}</main>
         </TooltipProvider>
       </body>
