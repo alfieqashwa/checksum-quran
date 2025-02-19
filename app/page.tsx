@@ -21,7 +21,7 @@ export default async function Home() {
   // console.log(JSON.stringify(alfajr3, null, 2))
 
   return (
-    <div className="my-4 p-4 xl:p-12">
+    <div>
       <section className="text-center font-bold">
         <h2 className="bg-gradient-to-t from-amber-400 to-emerald-400 bg-clip-text text-4xl tracking-wide text-transparent">
           {alfajr3.textImlaei}
