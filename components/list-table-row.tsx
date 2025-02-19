@@ -70,7 +70,15 @@ export const ListTableRow = ({
   return (
     <TableRow>
       <TableCell className="text-center">
-        <span className="rounded-md bg-muted px-3 py-1.5">{chapter.id}</span>
+        <span
+          className={cn(
+            "rounded-md bg-muted px-3 py-1.5",
+            toggleBackground && chapter.id % 2 === 0 && "text-emerald-400",
+            toggleBackground && chapter.id % 2 === 1 && "text-amber-400",
+          )}
+        >
+          {chapter.id}
+        </span>
       </TableCell>
       <TableCell className="text-center">
         <p className="mx-auto flex w-[120px] flex-col items-center justify-center space-y-1 whitespace-nowrap">
