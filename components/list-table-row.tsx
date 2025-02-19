@@ -57,7 +57,7 @@ export const ListTableRow = ({
       <span className="text-emerald-500">even</span>
     </p>
   ) : (
-    ""
+    <p className="hidden">no-tooltip</p>
   )
 
   const handleIncrement = () => {
@@ -113,17 +113,25 @@ export const ListTableRow = ({
         <div className="flex items-center justify-center space-x-6">
           <Button
             type="button"
+            disabled={toggleBackground}
             variant={"outline"}
             onClick={handleDecrement}
             className="rounded-lg px-3 py-1 font-bold"
           >
             <Minus />
           </Button>
-          <p className="w-14 rounded-md bg-muted px-3 py-1.5 text-center">
+          <p
+            className={cn(
+              "w-14 rounded-md bg-muted px-3 py-1.5 text-center",
+              toggleBackground && versesCount % 2 === 0 && "text-emerald-400",
+              toggleBackground && versesCount % 2 === 1 && "text-amber-400",
+            )}
+          >
             {versesCount}
           </p>
           <Button
             type="button"
+            disabled={toggleBackground}
             variant={"outline"}
             onClick={handleIncrement}
             className="rounded-lg px-3 py-1 font-bold"
@@ -133,7 +141,17 @@ export const ListTableRow = ({
         </div>
       </TableCell>
       <TableCell className="text-center">
-        <p className="mx-auto w-14 rounded-md bg-muted px-3 py-1.5">
+        <p
+          className={cn(
+            "mx-auto w-14 rounded-md bg-muted px-3 py-1.5",
+            toggleBackground &&
+              (chapter.id + versesCount) % 2 === 0 &&
+              "text-emerald-400",
+            toggleBackground &&
+              (chapter.id + versesCount) % 2 === 1 &&
+              "text-amber-400",
+          )}
+        >
           {chapter.id + versesCount}
         </p>
       </TableCell>
