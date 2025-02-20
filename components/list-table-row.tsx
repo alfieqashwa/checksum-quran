@@ -85,8 +85,9 @@ export const ListTableRow = ({
           <span
             className={cn(
               "text-lg font-bold tracking-wider",
-              toggleBackground && even2Odd ? "text-sky-400" : "",
-              toggleBackground && odd2Even ? "text-sky-400" : "",
+              (toggleBackground && even2Odd) || (toggleBackground && odd2Even)
+                ? "text-sky-400"
+                : "",
             )}
           >
             {chapter.nameArabic}
