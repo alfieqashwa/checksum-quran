@@ -68,7 +68,13 @@ export const ListTableRow = ({
   }
 
   return (
-    <TableRow>
+    <TableRow
+      className={cn(
+        (toggleBackground && even2Odd) || (toggleBackground && odd2Even)
+          ? "bg-muted"
+          : "",
+      )}
+    >
       <TableCell className="text-center">
         <span
           className={cn(
@@ -120,15 +126,17 @@ export const ListTableRow = ({
 
       <TableCell className="text-center">
         <div className="flex items-center justify-center space-x-6">
-          <Button
-            type="button"
-            disabled={toggleBackground}
-            variant={"outline"}
-            onClick={handleDecrement}
-            className="rounded-lg px-3 py-1 font-bold"
-          >
-            <Minus />
-          </Button>
+          {!toggleBackground && (
+            <Button
+              type="button"
+              disabled={toggleBackground}
+              variant={"outline"}
+              onClick={handleDecrement}
+              className="rounded-lg px-3 py-1 font-bold"
+            >
+              <Minus />
+            </Button>
+          )}
           <p
             className={cn(
               "w-14 rounded-md bg-muted px-3 py-1.5 text-center",
@@ -138,15 +146,17 @@ export const ListTableRow = ({
           >
             {versesCount}
           </p>
-          <Button
-            type="button"
-            disabled={toggleBackground}
-            variant={"outline"}
-            onClick={handleIncrement}
-            className="rounded-lg px-3 py-1 font-bold"
-          >
-            <Plus />
-          </Button>
+          {!toggleBackground && (
+            <Button
+              type="button"
+              disabled={toggleBackground}
+              variant={"outline"}
+              onClick={handleIncrement}
+              className="rounded-lg px-3 py-1 font-bold"
+            >
+              <Plus />
+            </Button>
+          )}
         </div>
       </TableCell>
       <TableCell className="text-center">
