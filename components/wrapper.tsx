@@ -83,9 +83,8 @@ export function Wrapper(props: Props) {
         setSumOfVersesNumber={setSumOfVersesNumber}
         onVersesCountChange={handleVersesCountChange}
       />
-      <div className="fixed bottom-4 right-4 z-20">
+      <div className="fixed bottom-2 right-2 z-20">
         <Button
-          size={"lg"}
           variant={"secondary"}
           onClick={handleReset}
           className="font-bold"

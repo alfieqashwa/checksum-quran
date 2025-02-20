@@ -12,10 +12,7 @@ export function LinkPage() {
     <div className="fixed right-2 top-2 z-50">
       <Link
         href={pathname === "/about" ? "/" : "/about"}
-        className={cn(
-          buttonVariants({ variant: "secondary", size: "lg" }),
-          "font-bold",
-        )}
+        className={cn(buttonVariants({ variant: "secondary" }), "font-bold")}
       >
         {pathname === "/about" ? "Home" : "About"}
       </Link>
